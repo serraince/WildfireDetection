@@ -135,9 +135,9 @@ Where:
 
 For both cases, the running time of the clustering portion of the code (T(cpu)) was 15 seconds on average. Assuming memory was used for the full time period, T(dram) = 10 seconds.
 
-For an average computer, P(cpu) is approximately 45 Watts while P(dram) is approximately 4 watts (Garcia-Martin et. Al, 2019). 
+For an average computer, P(cpu) is approximately 45 Watts while P(dram) is approximately 4 watts (Garcia-Martin et. al, 2019). 
 
-Therefore, for both KM and GMM, the below energy use can be approximated (Garcia et. al, 2019):
+Therefore, for both KM and GMM, the below energy use can be approximated (Garcia-Martin et. al, 2019):
 
 E = 15 * 45 + 4 * 10 = 715 Wh = 0.7kWh
 
