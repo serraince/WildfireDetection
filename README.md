@@ -190,6 +190,5 @@ Ozkan, M. and Erkoyun, E. (2021). Turkish wildfires are worst ever, Erdogan says
 
 Tsamados, M. and Chen, W. (2022). Welcome to GEOL0069 AI for Earth Observation — GEOL0069 Guide Book. [online] Github.io. Available at: https://cpomucl.github.io/GEOL0069-AI4EO/intro.html [Accessed 1 Jun. 2025].
 
-
-
+Note: AI was used in a limited manner to help with drafting a script and test the code. 
 
