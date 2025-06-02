@@ -121,7 +121,7 @@ Both maps output generally well with the RGB reference, and show a clear distinc
 
 The rise in Artificial Intelligence (AI) usage has meant new ways to extract, interpret or extrapolate from data. However, it is important to note the downsides of using Artificial Intelligence, namely its energy intensity, and to weigh the advantages and disadvantages of using such technology in models. For example, if the model is used in a project that aims to decrease carbon emissions, an analysis of the model itself should be done to ensure that the preventative measure does not offset the decrease in emissions significantly.
 
-###Manual Calculation
+### Manual Calculation
 
 Energy use can be manually calculated through exploring scientific literature and making estimations. 
 According to Garcia-Martin et. al's 2019 paper, energy consumption can be calculated by:
@@ -144,7 +144,7 @@ E = 15 * 45 + 4 * 10 = 715 Wh = 0.7kWh
 
 For the United Kingdom’s electricity grid, the carbon intensity is approximately 0.018 kg CO2 per kWh. So this value would be 0.7 * 0.018 = 0.0126 kg of CO2 for each clustering event. To compare the two models, using additional libraries in the code can be beneficial.
 
-###Using CodeCarbon
+### Using CodeCarbon
 There are two main methods for estimating AI energy use. The first method is a supply-chain method that calculates energy consumption by scaling up from hardware specifications, including how many AI chips are deployed and their power usage (O’Donnell and Crownhart, 2025). The second approach is a bottom-up approach, which directly measures the energy used for specific models or tasks using models (O’Donnell and Crownhart, 2025). In this code, we have used an open-source model named CodeCarbon. CodeCarbon calculates energy use by tracking the CPU, GPU and RAM usage of a code, estimating the power draw of the hardware in watts, measuring how long the code lasts, and finally estimating carbon emissions from Electricity Maps linked to the device’s IP (mlco2.github.io, n.d.).
 
 In general, GPUs require greater energy than CPUs (Huang et. al, 2009). Additionally, larger amounts of data correspond to more RAM needed, and more power consumption from the RAM. In GMM models, this is a limitation factor into the model’s success in laptop computers; this model used a smaller, cropped image to bypass the RAM overexertion issue, resulting in a lower energy use.
@@ -158,6 +158,9 @@ AI codes that involve images are more energy and carbon intensive than those wit
 CodeCarbon's values are lower than the estimate above, likely because it does not consider GPU use, while the data from the estimations does (mlco2.github.io, n.d.). Thus, the estimation above should be trusted more, however, CodeCarbon gives an idea for a comparison between the two models. 
 
 This model can be made more energy efficient by decreasing the amount of data plugged into each model, using renewable energy for electricity, and disregarding the non-NBR K-means clustering system and GMM. Overall, for this method of wildfire detection, GMM uses less electricity, although it is less accurate than KM. 
+
+## For a demonstration of the code, please look at this video explanation:
+[https://youtu.be/cJyGR89mbCs] 
 
 
 ## References
