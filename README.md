@@ -40,7 +40,7 @@ To access the data used in this code:
 
 In recent years, the prevalence of wildfires has increased, partially due to rising global temperatures caused by climate change (joint-research-centre.ec.europa.eu, 2023). Fast and accurate detection of wildfires is critical for minimising their devastating ecological, social, and economic impacts. Forest ecosystems play a large role in regulating the climate, hosting various species, and sustaining the livelihoods of nearby communities. The already-vulnerable Mediterranean region has already faced an increase in fire risk due to climate change (joint-research-centre.ec.europa.eu, 2023). This project proposes a method to make the remediation process faster.
 
-Delays in wildfire detection can result in underestimating the extent of damage and incorrect responses, leading to large-scale habitat destruction, loss of species, and hindering the development of surrounding communities, preventing the progress towards several Sustainable Development Goals (Aydın-Kandemir & Demir, 2023). Thus, quick and precise identification of land change in fire-affected areas using Earth Observation and estimating the percentage of damage is essential for emergency response, post-fire strategization, biodiversity protection, and long-term land management planning. 
+Delays in wildfire detection can result in underestimating the extent of damage and incorrect responses, leading to large-scale habitat destruction, loss of species, and hindering the development of surrounding communities, preventing the progress towards several Sustainable Development Goals (Aydın-Kandemir and Demir, 2023). Thus, quick and precise identification of land change in fire-affected areas using Earth Observation and estimating the percentage of damage is essential for emergency response, post-fire strategization, biodiversity protection, and long-term land management planning. 
 
 Satellite imagery can be used to determine land-use-land-change (LULC). Using Sentinel 2A imagery, this code implements unsupervised classification methods on burnt areas from the 2021 Manavgat mega wildfire in Turkey. Five spectral bands (B2, B3, B4, B8A, B12) were extracted from Sentinel-2 Level-2A imagery. The two methods used in this code are K-Means Clustering (KM) and Gaussian Mixture Models (GMM). Both algorithms have been previously used in academic literature exploring wildfire detection (Jain et. al, 2020).
 
@@ -68,9 +68,10 @@ NBR = (NIR-SWIR)/(NIR + SWIR)
 
 ### K-Means Clustering (KM)
 
-K-means clustering is a type of unsupervised learning algorithm that partitions a dataset into a number (k) of clusters, based on the similarity of the features of the data (GEOL0069 Notebook, 2025). A k number of centroids (center points of each cluster) are designed, and each data point is assigned to the nearest centroid (GEOL0069 Notebook, 2025).
+K-means clustering is a type of unsupervised learning algorithm that partitions a dataset into a number (k) of clusters, based on the similarity of the features of the data (Tsamados and Chen, 2022). A k number of centroids (center points of each cluster) are designed, and each data point is assigned to the nearest centroid (Tsamados and Chen, 2022).
 
-KM is suitable for large dataset applications where the data structure is not known beforehand (GEOL0069 Notebook, 2025). In the case of wildfires, satellite imagery can encompass large datasets, and thus KM is applicable in this case. This makes it suitable for different burn areas that could have different burn intensities and land cover. 
+KM is suitable for large dataset applications where the data structure is not known beforehand (Tsamados and Chen, 2022). In the case of wildfires, satellite imagery can encompass large datasets, and thus KM is applicable in this case. This makes it suitable for different burn areas that could have different burn intensities and land cover. There are 3 clusters: burnt area, forest area, and other. 
+
 
 <img width="452" alt="Screenshot 2025-06-02 at 05 37 27" src="https://github.com/user-attachments/assets/adb4ff68-9895-4b59-be21-5becae7b0241" />
 
@@ -83,7 +84,7 @@ KM is suitable for large dataset applications where the data structure is not kn
 
 ### Gaussian Mixture Models (GMM)
 
-GMMs are unsupervised clustering algorithms that model data as a mixture of different Gaussian distributions (GEOL0069 Notebook, 2025). They are soft-clustering methods, assigning probabilities to each point belonging to each cluster. Where K-Means is a more “strict” clustering method, GMM incorporates probability, making it more flexible. 
+GMMs are unsupervised clustering algorithms that model data as a mixture of different Gaussian distributions (Tsamados and Chen, 2022). They are soft-clustering methods, assigning probabilities to each point belonging to each cluster. Where K-Means is a more “strict” clustering method, GMM incorporates probability, making it more flexible.
 
 <img width="424" alt="Screenshot 2025-06-02 at 05 14 41" src="https://github.com/user-attachments/assets/6ad2746f-2b1f-4906-9ede-723820328c8a" />
 
@@ -91,13 +92,11 @@ GMMs are unsupervised clustering algorithms that model data as a mixture of diff
 **Features of GMM**
 
 1) Number of components -similar to clusters in K-Means. 
-2) Expectation-Maximization Algorithm, where the Expectation step calculates the probability of a point belonging to a cluster and the Maximisation step updates the parameters of the Gaussians and the process (GEOL0069 Notebook, 2025).
-3) Cluster shapes - the shape and size of the clusters are determined by the covariance type of the Gaussians (GEOL0069 Notebook, 2025).
+2) Expectation-Maximization Algorithm, where the Expectation step calculates the probability of a point belonging to a cluster and the Maximisation step updates the parameters of the Gaussians and the process (Tsamados and Chen, 2022).
+3) Cluster shapes - the shape and size of the clusters are determined by the covariance type of the Gaussians (Tsamados and Chen, 2022).
 4) Repetition until the parameters converge. 
 
 GMM is suitable for modelling complex shapes; hence, it was chosen for this project due to its ability to detect changes in natural land cover. Since natural land can be complex, the flexibility in GMM clustering is appropriate. 
-
-In this code, a GMM was trained on stratified samples across the scene to cluster pixels into four dominant land cover classes: burnt area, forest, built-up area, and bare soil. The classification was carried out in a tile-based approach to manage large data efficiently.
 
 ## Analysis
 
@@ -148,6 +147,8 @@ For the United Kingdom’s electricity grid, the carbon intensity is approximate
 There are two main methods for estimating AI energy use. The first method is a supply-chain method that calculates energy consumption by scaling up from hardware specifications, including how many AI chips are deployed and their power usage (O’Donnell and Crownhart, 2025). The second approach is a bottom-up approach, which directly measures the energy used for specific models or tasks using models (O’Donnell and Crownhart, 2025). In this code, we have used an open-source model named CodeCarbon. CodeCarbon calculates energy use by tracking the CPU, GPU and RAM usage of a code, estimating the power draw of the hardware in watts, measuring how long the code lasts, and finally estimating carbon emissions from Electricity Maps linked to the device’s IP (mlco2.github.io, n.d.).
 
 In general, GPUs require greater energy than CPUs (Huang et. al, 2009). Additionally, larger amounts of data correspond to more RAM needed, and more power consumption from the RAM. In GMM models, this is a limitation factor into the model’s success in laptop computers; this model used a smaller, cropped image to bypass the RAM overexertion issue, resulting in a lower energy use.
+
+Before running KM or GMM, the tracker must be started, and it must be stopped afterwards. The data must be stored in a csv file if the values are going to be plotted. 
 
 For a Python 3 runtime, a System RAM of 12.7GB max, a CPU from Google Cloud (model Intel(R) Xeon(R) CPU at 2.20GHz) and no GPU models, the K-Means Cluster with NBR and GMM both vary in values between 0.00005-0.0002 kWh. These values may vary slightly for different types of computers, runtimes and systems. Overall, their energy efficiency is quite similar, with KM requiring slightly more electricity.
 
